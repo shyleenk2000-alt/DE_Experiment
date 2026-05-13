@@ -1,0 +1,10 @@
+Data Modelling - we wanted to see the visuals of a star schema
+created database- staging and datawarehouse
+created dim_tables and fact_tables on the databases
+created stored procedures
+Automation (sql agents)
+Automation using Orchestrating tool
+--(ssis,python,golang)-in our case we will use ssis
+
+Please do not limit- Data Engineer (Data Analyst, Data Engineer, BI Engineer, Data Scientist)
+Junior Engineer 0-2 years
