@@ -38,3 +38,20 @@ Tell me which specific automation or artifact you want next: SSIS skeleton, SSIS
 - **DDL:** dw star-schema DDL is available at [sql/star_schema.sql](sql/star_schema.sql).
 - **Diagram:** visual diagram of the star schema is at [diagrams/star_schema.svg](diagrams/star_schema.svg).
 - **Summary:** central fact table `fact_sales` links to dimensions `dim_date`, `dim_location`, `dim_shop`, `dim_product`, `dim_customer`, and `dim_sales_person` using surrogate keys; see DDL for PK/FK and index recommendations.
+
+**ETL Helpers**
+- `sql/select_distincts.sql` — cleaned `SELECT DISTINCT` queries to seed dimensions and populate `dim_date`.
+- `sql/stored_procedures.sql` — T-SQL templates (`usp_load_stg_pc_sales`, `usp_load_dim_*`, `usp_load_fact_sales`) for Bronze→Silver loads.
+- `sql/create_tables.sql` — staging DDL for `stg_pc_sales` (raw bronze load).
+
+How to use
+- Stage files: copy `pc_data.csv` to your Bronze location or load into `stg_pc_sales` (see `usp_load_stg_pc_sales`).
+- Seed dims: run `sql/select_distincts.sql` SELECTs wrapped in `INSERT ... WHERE NOT EXISTS` or run the procedures in `sql/stored_procedures.sql`.
+- Load facts: run `usp_load_fact_sales` after dims and `dim_date` are populated.
+
+Next suggested steps
+- Generate an SSIS package skeleton and SQL Agent job templates (`ssis/README.md`).
+- Create a small Python ETL script to run the SELECTs and perform idempotent inserts locally.
+- Run profiling and build Gold aggregates (examples can be added to `sql/`).
+
+If you'd like, I can now generate the SSIS skeleton or a Python ETL runner — which do you prefer?
